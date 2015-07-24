@@ -1,7 +1,7 @@
-package DAO;
+package Datos;
 
-import Model.Tema;
-import Model.Termino;
+import Modelo.Tema;
+import Modelo.Termino;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.persistence.*;

@@ -5,9 +5,9 @@
  */
 package asterisk;
 
-import DAO.DAO;
-import Model.Tema;
-import Model.Termino;
+import Datos.DAO;
+import Modelo.Tema;
+import Modelo.Termino;
 import java.io.Console;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -39,6 +39,10 @@ public class Asterisk {
         } catch (final Exception e) {
             //  Handle any exceptions.
         }
+    }
+    
+    public void CrearTermino(){
+        
     }
 
     public static void main(String[] args) {
