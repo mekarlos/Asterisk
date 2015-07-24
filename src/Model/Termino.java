@@ -25,6 +25,8 @@ public class Termino implements Serializable {
     private String definicion;
     @ManyToOne(fetch = FetchType.LAZY)
     private Titulo titulo;
+    
+    
 
     public long getId() {
         return id;
