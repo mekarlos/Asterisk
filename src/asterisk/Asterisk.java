@@ -8,22 +8,12 @@ package asterisk;
 import DAO.DAO;
 import Model.Tema;
 import Model.Termino;
-import com.googlecode.lanterna.TerminalFacade;
-import com.googlecode.lanterna.gui.GUIScreen;
-import com.googlecode.lanterna.gui.dialog.DialogResult;
-import com.googlecode.lanterna.gui.dialog.MessageBox;
-import com.googlecode.lanterna.terminal.Terminal;
 import java.io.Console;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.fusesource.jansi.Ansi;
-import static org.fusesource.jansi.Ansi.ansi;
-import org.fusesource.jansi.AnsiConsole;
-import static org.fusesource.jansi.Ansi.*;
-import static org.fusesource.jansi.Ansi.Color.*;
 
 /**
  *
@@ -53,19 +43,6 @@ public class Asterisk {
 
     public static void main(String[] args) {
 
-        Terminal terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF8"));
-
-        terminal.putCharacter('H');
-        terminal.putCharacter('e');
-        terminal.putCharacter('l');
-        terminal.putCharacter('l');
-        terminal.putCharacter('o');
-        terminal.putCharacter('!');
-        terminal.moveCursor(0, 0);
-
-        GUIScreen guiScreen = TerminalFacade.createGUIScreen();
-        guiScreen.getScreen().startScreen();
-        DialogResult result = MessageBox.showMessageBox(guiScreen, "Hello 1989!", "Ready to configure your SoundBlaster IRQs?");
         /*      Scanner scan = new Scanner(System.in);
          AnsiConsole.systemInstall();
 
