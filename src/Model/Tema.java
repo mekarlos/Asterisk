@@ -32,6 +32,7 @@ public class Tema implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER, mappedBy = "tema")
+    
     private ArrayList<Titulo> titulos;
 
     public ArrayList<Titulo> getTitulos() {
