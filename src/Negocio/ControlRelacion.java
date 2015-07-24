@@ -10,5 +10,8 @@ package Negocio;
  * @author mekar_000
  */
 public class ControlRelacion {
-    
+
+    /*public darRelacion(long id){
+        
+     }*/
 }

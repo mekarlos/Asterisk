@@ -1,5 +1,6 @@
 package Datos;
 
+import Modelo.Relacion;
 import Modelo.Tema;
 import Modelo.Termino;
 import java.util.ArrayList;
@@ -100,11 +101,10 @@ public class DAO {
 
         DAO dao = new DAO();
 
-        Tema tema = new Tema();
+        Relacion r = new Relacion();
 
-        tema.setTema("Inmunologia");
+        r.setConexion("sa");
 
-        dao.create(tema);
-
+        dao.create(r);
     }
 }

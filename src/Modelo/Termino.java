@@ -6,12 +6,15 @@
 package Modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -23,10 +26,15 @@ public class Termino implements Serializable {
     private long id;
     private String termino;
     private String definicion;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Titulo titulo;
-    
-    
+    /*@ManyToMany(mappedBy = "terminos")
+     private ArrayList< Titulo> titulos;
+     */
+   @ManyToMany(mappedBy = "terminos", fetch = FetchType.EAGER)
+    private ArrayList<Tema> temas;
+
+    public Termino() {
+        temas = new ArrayList<Tema>();
+    }
 
     public long getId() {
         return id;
@@ -44,19 +52,6 @@ public class Termino implements Serializable {
         this.termino = termino;
     }
 
-    public Titulo getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(Titulo titulo) {
-        this.titulo = titulo;
-    }
-
-    @Override
-    public String toString() {
-        return termino + "";
-    }
-
     public String getDefinicion() {
         return definicion;
     }
@@ -65,4 +60,12 @@ public class Termino implements Serializable {
         this.definicion = definicion;
     }
 
+    public ArrayList<Tema> getTemas() {
+        return temas;
+    }
+
+    public void setTemas(ArrayList<Tema> temas) {
+        this.temas = temas;
+    }
+    
 }

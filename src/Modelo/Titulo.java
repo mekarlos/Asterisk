@@ -14,6 +14,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -38,14 +41,23 @@ public class Titulo implements Serializable {
     private ArrayList<Titulo> subtitulos;
     @ManyToOne(fetch = FetchType.LAZY)
     private Titulo principal;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Tema tema;
+/*
+    @ManyToMany(mappedBy = "titulos")
+    private ArrayList<Tema> temas;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER, mappedBy = "titulo")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "TituloTermino",
+            joinColumns = {
+                @JoinColumn(name = "TituloId", referencedColumnName = "id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "TerminoId", referencedColumnName = "id")})
     private Collection<Termino> terminos;
-
+*/
     public Titulo() {
+        subtitulos = new ArrayList<>();
+  //      temas = new ArrayList<>();
+    //    terminos = new ArrayList<>();
     }
 
     public Titulo(int id, String titulo, int nivel) {
@@ -102,21 +114,21 @@ public class Titulo implements Serializable {
         this.principal = principal;
     }
 
-    public Tema getTema() {
-        return tema;
-    }
-
-    public void setTema(Tema tema) {
-        this.tema = tema;
-    }
-
-    public Collection<Termino> getTerminos() {
-        return terminos;
-    }
-
-    public void setTerminos(Collection<Termino> terminos) {
-        this.terminos = terminos;
-    }
+//    public ArrayList<Tema> getTemas() {
+//        return temas;
+//    }
+//
+//    public void setTemas(ArrayList<Tema> temas) {
+//        this.temas = temas;
+//    }
+//
+//    public Collection<Termino> getTerminos() {
+//        return terminos;
+//    }
+//
+//    public void setTerminos(Collection<Termino> terminos) {
+//        this.terminos = terminos;
+//    }
 
     @Override
     public String toString() {

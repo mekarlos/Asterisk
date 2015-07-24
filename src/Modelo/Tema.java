@@ -14,6 +14,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -29,22 +32,30 @@ public class Tema implements Serializable {
     @SequenceGenerator(name = "s1", sequenceName = "ms1")
     private long id;
     private String tema;
+    
+    /* @ManyToMany(cascade = CascadeType.ALL)
+     @JoinTable(
+     name = "TemaTitulo",
+     joinColumns = {
+     @JoinColumn(name = "TemaId", referencedColumnName = "id")},
+     inverseJoinColumns = {
+     @JoinColumn(name = "TituloId", referencedColumnName = "id")})
+     private ArrayList<Titulo> titulos;
+     */
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER, mappedBy = "tema")
-
-    private ArrayList<Titulo> titulos;
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "FaseEquipo",
+            joinColumns = {
+                @JoinColumn(name = "faseid", referencedColumnName = "ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "equipoid", referencedColumnName = "ID")})
+     private ArrayList<Termino> terminos;
+     
     public Tema() {
-        titulos = new ArrayList<>();
-    }
+        // titulos = new ArrayList<>();
+          //   terminos = new ArrayList<Termino>();
 
-    public ArrayList<Titulo> getTitulos() {
-        return titulos;
-    }
-
-    public void setTitulos(ArrayList<Titulo> titulos) {
-        this.titulos = titulos;
     }
 
     public long getId() {
@@ -63,9 +74,16 @@ public class Tema implements Serializable {
         this.tema = tema;
     }
 
-    @Override
-    public String toString() {
-        return "" + "" + id + ". " + tema;
+   
+
+    public ArrayList<Termino> getTerminos() {
+        return terminos;
     }
+
+    public void setTerminos(ArrayList<Termino> terminos) {
+        this.terminos = terminos;
+    }
+
+    
 
 }
