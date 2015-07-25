@@ -26,9 +26,9 @@ public class Termino implements Serializable {
     private long id;
     private String termino;
     private String definicion;
-    /*@ManyToMany(mappedBy = "terminos")
+    @ManyToMany(mappedBy = "terminos", fetch = FetchType.EAGER)
      private ArrayList< Titulo> titulos;
-     */
+     
    @ManyToMany(mappedBy = "terminos", fetch = FetchType.EAGER)
     private ArrayList<Tema> temas;
 
@@ -67,5 +67,14 @@ public class Termino implements Serializable {
     public void setTemas(ArrayList<Tema> temas) {
         this.temas = temas;
     }
+
+    public ArrayList<Titulo> getTitulos() {
+        return titulos;
+    }
+
+    public void setTitulos(ArrayList<Titulo> titulos) {
+        this.titulos = titulos;
+    }
+    
     
 }
