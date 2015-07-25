@@ -41,23 +41,24 @@ public class Titulo implements Serializable {
     private ArrayList<Titulo> subtitulos;
     @ManyToOne(fetch = FetchType.LAZY)
     private Titulo principal;
-/*
-    @ManyToMany(mappedBy = "titulos")
+
+    @ManyToMany(mappedBy = "titulos", fetch = FetchType.EAGER)
     private ArrayList<Tema> temas;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    
+   @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "TituloTermino",
             joinColumns = {
-                @JoinColumn(name = "TituloId", referencedColumnName = "id")},
+                @JoinColumn(name = "tituloid", referencedColumnName = "ID")},
             inverseJoinColumns = {
-                @JoinColumn(name = "TerminoId", referencedColumnName = "id")})
+                @JoinColumn(name = "terminoid", referencedColumnName = "ID")})
     private Collection<Termino> terminos;
-*/
+
     public Titulo() {
         subtitulos = new ArrayList<>();
-  //      temas = new ArrayList<>();
-    //    terminos = new ArrayList<>();
+        temas = new ArrayList<>();
+        terminos = new ArrayList<>();
     }
 
     public Titulo(int id, String titulo, int nivel) {
@@ -114,21 +115,24 @@ public class Titulo implements Serializable {
         this.principal = principal;
     }
 
-//    public ArrayList<Tema> getTemas() {
-//        return temas;
-//    }
-//
-//    public void setTemas(ArrayList<Tema> temas) {
-//        this.temas = temas;
-//    }
-//
-//    public Collection<Termino> getTerminos() {
-//        return terminos;
-//    }
-//
-//    public void setTerminos(Collection<Termino> terminos) {
-//        this.terminos = terminos;
-//    }
+    public Collection<Termino> getTerminos() {
+        return terminos;
+    }
+
+    public void setTerminos(Collection<Termino> terminos) {
+        this.terminos = terminos;
+    }
+
+    public ArrayList<Tema> getTemas() {
+        return temas;
+    }
+
+    public void setTemas(ArrayList<Tema> temas) {
+        this.temas = temas;
+    }
+    
+
+
 
     @Override
     public String toString() {

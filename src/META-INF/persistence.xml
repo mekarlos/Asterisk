@@ -5,6 +5,7 @@
     <class>Modelo.Termino</class>
     <class>Modelo.Tema</class>
     <class>Modelo.Relacion</class>
+    <class>Modelo.Titulo</class>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/asterisk"/>
