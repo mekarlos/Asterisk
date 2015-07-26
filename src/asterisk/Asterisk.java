@@ -163,13 +163,19 @@ public class Asterisk {
         System.out.println("Ingrese termino buscado: ");
         String term = scan.nextLine().toLowerCase();
         ArrayList<Termino> terminos = dao.obtenerListaTerminos(term, tema);
+        System.out.println("0 No existe");
         for (int i = 0; i < terminos.size(); i++) {
             Termino t = terminos.get(i);
             System.out.println((i + 1) + " " + t.toString());
         }
         System.out.println("Seleccione termino: ");
         int opt = new Integer(scan.nextLine());
-        return terminos.get(opt);
+        try {
+            return terminos.get(opt);
+
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static void crearRelacion() {
@@ -194,23 +200,29 @@ public class Asterisk {
         if (titulo == null) {
             titulo = seleccionarTituloTema();
         }
-        String term, def;
-        System.out.println("Ingrese Termino:");
-        term = scan.nextLine();
-        term = formatoCapital(term);
-        System.out.println("Ingrese Definicion:");
-        def = scan.nextLine();
-        def = formatoCapital(def);
-        Termino termino = new Termino(term, def);
-        dao.create(termino);
-
+        Termino termino = seleccionarTermino();
+        if (termino != null) {
+            termino.addTema(tema);
+            termino.addTitulo(titulo);
+            dao.update(termino);
+        } else {
+            String term, def;
+            System.out.println("Ingrese Termino:");
+            term = scan.nextLine();
+            term = formatoCapital(term);
+            System.out.println("Ingrese Definicion:");
+            def = scan.nextLine();
+            def = formatoCapital(def);
+            termino = new Termino(term, def, titulo, tema);
+            dao.create(termino);
+        }
     }
 
     public static void verTemas() {
         ArrayList<Tema> temas = dao.obtenerListaTemas();
         for (int i = 0; i < temas.size(); i++) {
             Tema t = temas.get(i);
-            System.out.println(t.toString());
+            System.out.println((i + 1) + " " + t.toString());
         }
     }
 
@@ -308,9 +320,6 @@ public class Asterisk {
                 seleccionarTermino();
                 break;
             case 12:
-                seleccionarTituloTema();
-                break;
-            case 13:
                 System.exit(0);
                 break;
 
