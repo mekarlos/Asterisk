@@ -206,6 +206,68 @@ public class Asterisk {
 
     }
 
+    public static void verTemas() {
+        ArrayList<Tema> temas = new ArrayList<Tema>();
+        for (int i = 0; i < temas.size(); i++) {
+            Tema t = temas.get(i);
+            System.out.println(t.toString());
+        }
+    }
+
+    public static void verTemaTitulos() {
+        if (tema == null) {
+            tema = seleccionarTema();
+        }
+        ArrayList<Titulo> titulos = dao.obtenerListaTitulosTema(tema);
+
+        for (int i = 0; i < titulos.size(); i++) {
+            Titulo tit = titulos.get(i);
+            tit.imprimeTitulos();
+        }
+
+    }
+
+    public static void verTemaTituloTerminos() {
+        if (tema == null) {
+            tema = seleccionarTema();
+        }
+        ArrayList<Titulo> titulos = dao.obtenerListaTitulosTema(tema);
+
+        for (int i = 0; i < titulos.size(); i++) {
+            Titulo tit = titulos.get(i);
+            tit.imprimeTituloTerminos();
+        }
+
+    }
+
+    public static void verTemaTerminos() {
+        if (tema == null) {
+            tema = seleccionarTema();
+        }
+        for (int i = 0; i < tema.getTerminos().size(); i++) {
+            Termino tt = tema.getTerminos().get(i);
+            System.out.println(tt.toString());
+        }
+    }
+
+    public static void mostrarMenu() {
+
+        System.out.println("\t\tMenu");
+        System.out.println("1.Crear Tema");
+        System.out.println("2.Crear Titulo");
+        System.out.println("3.Crear Termino");
+        System.out.println("4.Crear Relacion");
+        System.out.println("5.Ver Temas");
+        System.out.println("6.Ver Tema Titulos ");
+        System.out.println("7.Ver Tema Terminos");
+        System.out.println("8.Ver Tema Titulos Termino");
+        System.out.println("9.Seleccionar Tema");
+        System.out.println("10.Seleccionar Titulo");
+        System.out.println("11.Seleccionar Termino");
+        System.out.println("12.Salir");
+
+    }
+
     public static void ejecutar() {
         int opt;
         System.out.println("Ingrese una opción: ");
@@ -228,10 +290,22 @@ public class Asterisk {
                 verTemas();
                 break;
             case 6:
-
+                verTemaTitulos();
+                break;
+            case 7:
+                verTemaTerminos();
+                break;
+            case 8:
+                verTemaTituloTerminos();
+                break;
+            case 9:
+                seleccionarTema();
+                break;
+            case 10:
+                seleccionarTituloTema();
                 break;
             case 11:
-                seleccionarTema();
+                seleccionarTermino();
                 break;
             case 12:
                 seleccionarTituloTema();
@@ -241,48 +315,6 @@ public class Asterisk {
                 break;
 
         }
-    }
-
-    public static void verTemas() {
-        ArrayList<Tema> temas = new ArrayList<Tema>();
-        for (int i = 0; i < temas.size(); i++) {
-            Tema t = temas.get(i);
-            System.out.println(t.toString());
-        }
-    }
-
-    public static void verTemaTitulos() {
-        if (tema == null) {
-            tema = seleccionarTema();
-        }
-        ArrayList<Titulo> titulos = dao.obtenerListaTitulosTema(tema);
-        
-        for (int i = 0; i < titulos.size(); i++) {
-            Titulo tit = titulos.get(i);
-            tit.imprime();
-        }
-
-    }
-
-    public static void mostrarMenu() {
-
-        System.out.println("\t\tMenu");
-        System.out.println("1.Crear Tema");
-        System.out.println("2.Crear Titulo");
-        System.out.println("3.Crear Termino");
-        System.out.println("4.Crear Relacion");
-        System.out.println("5.Ver Temas");
-        System.out.println("6.Ver Tema Titulos ");
-        System.out.println("7.Ver Tema Terminos");
-        System.out.println("8.Ver Tema Titulos Termino");
-        System.out.println("9.Ver Titulos");
-        System.out.println("10.Ver Titulos Tema");
-        System.out.println("11.Ver Titulo Termino");
-        System.out.println("12.Ver Terminos Tema");
-        System.out.println("13.Seleccionar Tema");
-        System.out.println("14.Seleccionar Titulo");
-        System.out.println("15.Salir");
-
     }
 
     public static void main(String[] args) {
