@@ -44,6 +44,16 @@ public class Asterisk {
         }
     }
 
+    public static String formatoCapital(String text) {
+        String s = text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();;
+        s = s.replace("  ", " ");
+        return s;
+    }
+
+    public static Termino darTermino(String termino) {
+        return dao.obtenerTermino(termino);
+    }
+
     public static void crearTema() {
         System.out.println("Ingrese Nombre del Tema: ");
         String t = scan.nextLine();
@@ -123,6 +133,25 @@ public class Asterisk {
         }
     }
 
+    public static void crearTermino() {
+        if (tema == null) {
+            tema = seleccionarTema();
+        }
+        if (titulo == null) {
+            titulo = seleccionarTituloTema(tema);
+        }
+        String term, def;
+        System.out.println("Ingrese Termino:");
+        term = scan.nextLine();
+        term = formatoCapital(term);
+        System.out.println("Ingrese Definicion:");
+        def = scan.nextLine();
+        def = formatoCapital(def);
+        Termino termino = new Termino(term, def);
+        dao.create(termino);
+
+    }
+
     public static void ejecutar() {
         int opt;
         System.out.println("Ingrese una opción: ");
@@ -136,7 +165,7 @@ public class Asterisk {
                 crearTitulo();
                 break;
             case 3:
-
+                crearTermino();
                 break;
         }
     }

@@ -30,7 +30,7 @@ public class Titulo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "s3")
-    @SequenceGenerator(name = "s3", sequenceName = "ms3")
+    @SequenceGenerator(name = "s3", sequenceName = "s3")
     private int id;
     private String titulo;
     private int nivel;
@@ -42,11 +42,10 @@ public class Titulo implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Titulo principal;
 
-    @ManyToMany(mappedBy = "titulos", fetch = FetchType.EAGER)
-    private ArrayList<Tema> temas;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Tema tema;
 
-    
-   @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "TituloTermino",
             joinColumns = {
@@ -57,7 +56,7 @@ public class Titulo implements Serializable {
 
     public Titulo() {
         subtitulos = new ArrayList<>();
-        temas = new ArrayList<>();
+
         terminos = new ArrayList<>();
     }
 
@@ -123,20 +122,17 @@ public class Titulo implements Serializable {
         this.terminos = terminos;
     }
 
-    public ArrayList<Tema> getTemas() {
-        return temas;
+    public Tema getTema() {
+        return tema;
     }
 
-    public void setTemas(ArrayList<Tema> temas) {
-        this.temas = temas;
+    public void setTema(Tema tema) {
+        this.tema = tema;
     }
-    
-
-
 
     @Override
     public String toString() {
-        return "-" + id + " " + titulo + ((nivel == 1) ? "" : "");
+        return id + " " + titulo + " ";
     }
 
 }

@@ -84,6 +84,20 @@ public class DAO {
 
     }
 
+    public Termino obtenerTermino(String termino) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
+        EntityManager em = emf.createEntityManager();
+
+        Query query = em.createQuery("select d from Termino d where lower(d.termino) like :t");
+        query.setParameter("t", "%" + termino + "%");
+        ArrayList<Termino> ts = new ArrayList<>(query.getResultList());
+        if (ts.size() > 0) {
+            return ts.get(0);
+        } else {
+            return null;
+        }
+    }
+
     public ArrayList<Termino> obtenerListaTerminos() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
         EntityManager em = emf.createEntityManager();
@@ -113,6 +127,14 @@ public class DAO {
         EntityManager em = emf.createEntityManager();
 
         Query query = em.createQuery("select d from Titulo d");
+        return new ArrayList<>(query.getResultList());
+    }
+
+    public ArrayList<Titulo> obtenerListaTitulosTema(Tema tema) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("select d from Titulo d where d.tema=:t");
+        query.setParameter("t", tema);
         return new ArrayList<>(query.getResultList());
     }
 

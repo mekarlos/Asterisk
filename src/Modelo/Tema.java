@@ -29,17 +29,12 @@ public class Tema implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "s1")
-    @SequenceGenerator(name = "s1", sequenceName = "ms1")
+    @SequenceGenerator(name = "s1", sequenceName = "s1")
     private long id;
     private String tema;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "TemaTitulo",
-            joinColumns = {
-                @JoinColumn(name = "temaid", referencedColumnName = "ID")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "tituloid", referencedColumnName = "ID")})
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER, mappedBy = "tema")
     private ArrayList<Titulo> titulos;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -52,9 +47,15 @@ public class Tema implements Serializable {
     private ArrayList<Termino> terminos;
 
     public Tema() {
-         titulos = new ArrayList<>();
-           terminos = new ArrayList<Termino>();
+        titulos = new ArrayList<>();
+        terminos = new ArrayList<>();
 
+    }
+
+    public Tema(String tema) {
+        titulos = new ArrayList<>();
+        terminos = new ArrayList<>();
+        this.tema = tema;
     }
 
     public long getId() {
@@ -88,6 +89,10 @@ public class Tema implements Serializable {
     public void setTitulos(ArrayList<Titulo> titulos) {
         this.titulos = titulos;
     }
-    
+
+    @Override
+    public String toString() {
+        return tema+"";
+    }
 
 }

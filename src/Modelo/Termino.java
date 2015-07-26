@@ -22,18 +22,24 @@ public class Termino implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "s2")
-    @SequenceGenerator(name = "s2", sequenceName = "ms2")
+    @SequenceGenerator(name = "s2", sequenceName = "s2")
     private long id;
     private String termino;
     private String definicion;
     @ManyToMany(mappedBy = "terminos", fetch = FetchType.EAGER)
-     private ArrayList< Titulo> titulos;
-     
-   @ManyToMany(mappedBy = "terminos", fetch = FetchType.EAGER)
+    private ArrayList< Titulo> titulos;
+
+    @ManyToMany(mappedBy = "terminos", fetch = FetchType.EAGER)
     private ArrayList<Tema> temas;
 
     public Termino() {
-        temas = new ArrayList<Tema>();
+        temas = new ArrayList<>();
+        titulos = new ArrayList<>();
+    }
+
+    public Termino(String termino, String definicion) {
+        this.termino = termino;
+        this.definicion = definicion;
     }
 
     public long getId() {
@@ -75,6 +81,5 @@ public class Termino implements Serializable {
     public void setTitulos(ArrayList<Titulo> titulos) {
         this.titulos = titulos;
     }
-    
-    
+
 }

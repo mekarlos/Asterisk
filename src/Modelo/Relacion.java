@@ -22,7 +22,7 @@ public class Relacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "s4")
-    @SequenceGenerator(name = "s4", sequenceName = "ms4")
+    @SequenceGenerator(name = "s4", sequenceName = "s4")
     private long id;
     private String conexion;
     @OneToOne(fetch = FetchType.EAGER)
