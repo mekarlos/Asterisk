@@ -3,6 +3,7 @@ package Datos;
 import Modelo.Relacion;
 import Modelo.Tema;
 import Modelo.Termino;
+import Modelo.Titulo;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.persistence.*;
@@ -24,7 +25,6 @@ public class DAO {
             flag = false;
         }
         return flag;
-
     }
 
     public boolean update(Object entidad) {
@@ -59,42 +59,76 @@ public class DAO {
 
     }
 
-    public Termino retrieveTermino(long id) {
+    public Relacion obtenerRelacion(long id) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
+        EntityManager em = emf.createEntityManager();
+        return em.find(Relacion.class, id);
+    }
+
+    public Tema obtenerTema(long id) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
+        EntityManager em = emf.createEntityManager();
+        return em.find(Tema.class, id);
+    }
+
+    public Titulo obtenerTitulo(long id) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
+        EntityManager em = emf.createEntityManager();
+        return em.find(Titulo.class, id);
+    }
+
+    public Termino obtenerTermino(long id) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
         EntityManager em = emf.createEntityManager();
         return em.find(Termino.class, id);
 
     }
 
-    public ArrayList<Termino> ListaTerminos() {
+    public ArrayList<Termino> obtenerListaTerminos() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
         EntityManager em = emf.createEntityManager();
 
         Query query = em.createQuery("select d from Termino d");
-        return new ArrayList<Termino>(query.getResultList());
+        return new ArrayList<>(query.getResultList());
     }
 
-    public ArrayList<Termino> ListaTerminosTema(long id) {
+    public ArrayList<Tema> obtenerListaTemas() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
+        EntityManager em = emf.createEntityManager();
+
+        Query query = em.createQuery("select d from Tema d");
+        return new ArrayList<>(query.getResultList());
+    }
+
+    public ArrayList<Relacion> obtenerListaRelaciones() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
+        EntityManager em = emf.createEntityManager();
+
+        Query query = em.createQuery("select d from Relacion d");
+        return new ArrayList<>(query.getResultList());
+    }
+
+    public ArrayList<Titulo> obtenerListaTitulos() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
+        EntityManager em = emf.createEntityManager();
+
+        Query query = em.createQuery("select d from Titulo d");
+        return new ArrayList<>(query.getResultList());
+    }
+
+    public ArrayList<Termino> obtenerListaTerminosTema(long id) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
         EntityManager em = emf.createEntityManager();
 
         Query query = em.createQuery("select d from Termino d where d.tema.id=:id");
         query.setParameter("id", id);
-        return new ArrayList<Termino>(query.getResultList());
+        return new ArrayList<>(query.getResultList());
     }
 
-    public ArrayList<Tema> ListaTemas() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
-        EntityManager em = emf.createEntityManager();
-
-        Query query = em.createQuery("select d from Tema d");
-        return new ArrayList<Tema>(query.getResultList());
-    }
-
-    public Termino darTermino() {
+    public Termino darTerminoAleatorio() {
         Random r = new Random();
-        ArrayList<Termino> terminos = ListaTerminos();
-        return ListaTerminos().get(r.nextInt(terminos.size()));
+        ArrayList<Termino> terminos = obtenerListaTerminos();
+        return obtenerListaTerminos().get(r.nextInt(terminos.size()));
     }
 
     public static void main(String[] args) {
