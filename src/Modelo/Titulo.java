@@ -153,11 +153,19 @@ public class Titulo implements Serializable {
 
     }
 
-    public void imprime() {
+    public void imprimeTitulos() {
         System.out.println(toString());
         for (int i = 0; i < subtitulos.size(); i++) {
             Titulo t = subtitulos.get(i);
-            t.imprime();
+            t.imprimeTitulos();
+        }
+    }
+    public void imprimeTituloTerminos() {
+        System.out.println(toString());
+        imprimeTerminos();
+        for (int i = 0; i < subtitulos.size(); i++) {
+            Titulo t = subtitulos.get(i);
+            t.imprimeTitulos();
         }
     }
 

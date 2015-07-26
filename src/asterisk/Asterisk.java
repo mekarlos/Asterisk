@@ -207,7 +207,7 @@ public class Asterisk {
     }
 
     public static void verTemas() {
-        ArrayList<Tema> temas = new ArrayList<Tema>();
+        ArrayList<Tema> temas = dao.obtenerListaTemas();
         for (int i = 0; i < temas.size(); i++) {
             Tema t = temas.get(i);
             System.out.println(t.toString());
