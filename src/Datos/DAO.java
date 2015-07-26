@@ -89,13 +89,23 @@ public class DAO {
         EntityManager em = emf.createEntityManager();
 
         Query query = em.createQuery("select d from Termino d where lower(d.termino) like :t");
-        query.setParameter("t", "%" + termino + "%");
+        query.setParameter("t", "" + termino.toLowerCase() + "");
         ArrayList<Termino> ts = new ArrayList<>(query.getResultList());
         if (ts.size() > 0) {
             return ts.get(0);
         } else {
             return null;
         }
+    }
+
+    public ArrayList<Termino> obtenerListaTerminos(String termino, Tema tema) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("select d from Termino d where d.temas.tema=:tema and lower(d.termino) like :t");
+        query.setParameter("t", "" + termino.toLowerCase() + "");
+        query.setParameter("tema", tema);
+        ArrayList<Termino> ts = new ArrayList<>(query.getResultList());
+        return ts;
     }
 
     public ArrayList<Termino> obtenerListaTerminos() {
@@ -133,7 +143,7 @@ public class DAO {
     public ArrayList<Titulo> obtenerListaTitulosTema(Tema tema) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("select d from Titulo d where d.tema=:t");
+        Query query = em.createQuery("select d from Titulo d where d.tema=:t and d.principal is null");
         query.setParameter("t", tema);
         return new ArrayList<>(query.getResultList());
     }

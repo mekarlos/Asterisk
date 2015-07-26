@@ -30,7 +30,7 @@ public class Titulo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "s3")
-    @SequenceGenerator(name = "s3", sequenceName = "s3")
+    @SequenceGenerator(name = "s3", sequenceName = "s3", initialValue = 1, allocationSize = 1)
     private int id;
     private String titulo;
     private int nivel;
@@ -52,7 +52,7 @@ public class Titulo implements Serializable {
                 @JoinColumn(name = "tituloid", referencedColumnName = "ID")},
             inverseJoinColumns = {
                 @JoinColumn(name = "terminoid", referencedColumnName = "ID")})
-    private Collection<Termino> terminos;
+    private ArrayList<Termino> terminos;
 
     public Titulo() {
         subtitulos = new ArrayList<>();
@@ -114,11 +114,11 @@ public class Titulo implements Serializable {
         this.principal = principal;
     }
 
-    public Collection<Termino> getTerminos() {
+    public ArrayList<Termino> getTerminos() {
         return terminos;
     }
 
-    public void setTerminos(Collection<Termino> terminos) {
+    public void setTerminos(ArrayList<Termino> terminos) {
         this.terminos = terminos;
     }
 
@@ -132,7 +132,33 @@ public class Titulo implements Serializable {
 
     @Override
     public String toString() {
-        return id + " " + titulo + " ";
+
+        String s = "";
+        for (int i = 0; i < nivel; i++) {
+            s += "\t";
+        }
+        return s + id + " " + titulo + " ";
+    }
+
+    public void imprimeTerminos() {
+        String s = "";
+        for (int i = 0; i < nivel; i++) {
+            s += "\t";
+        }
+        s += "\t";
+        for (int i = 0; i < terminos.size(); i++) {
+            Termino tt = terminos.get(i);
+            System.out.println(tt.toString());
+        }
+
+    }
+
+    public void imprime() {
+        System.out.println(toString());
+        for (int i = 0; i < subtitulos.size(); i++) {
+            Titulo t = subtitulos.get(i);
+            t.imprime();
+        }
     }
 
 }

@@ -6,6 +6,7 @@
 package asterisk;
 
 import Datos.DAO;
+import Modelo.Relacion;
 import Modelo.Tema;
 import Modelo.Termino;
 import Modelo.Titulo;
@@ -57,18 +58,21 @@ public class Asterisk {
     public static void crearTema() {
         System.out.println("Ingrese Nombre del Tema: ");
         String t = scan.nextLine();
+        t = formatoCapital(t);
         Tema tema = new Tema(t);
         dao.create(tema);
     }
 
     public static void crearTitulo() {
         System.out.println("Ingrese Titulo:");
-        String tit = scan.nextLine();
-        String desc = scan.nextLine();
+        String tit = formatoCapital(scan.nextLine());
+        String desc = formatoCapital(scan.nextLine());
         Titulo titulo = new Titulo();
         titulo.setDescripcion(desc);
         titulo.setTitulo(tit);
-        Tema tema = seleccionarTema();
+        if (tema == null) {
+            tema = seleccionarTema();
+        }
         titulo.setTema(tema);
         Titulo padre = seleccionarTituloTema(tema);
         titulo.setPrincipal(padre);
@@ -98,19 +102,41 @@ public class Asterisk {
         }
     }
 
-    public static Titulo seleccionarTituloTema(Tema tema) {
+    public static Titulo seleccionarTituloTema() {
         ArrayList<Titulo> titulos = dao.obtenerListaTitulosTema(tema);
+        if (tema == null) {
+            seleccionarTema();
+        }
         System.out.println("0 Sin titulo");
         for (int i = 0; i < titulos.size(); i++) {
             Titulo titulo = titulos.get(i);
             System.out.println(titulo.toString());
-
         }
-        int opt;
+        long opt;
         System.out.println("Seleccione Titulo:");
-        opt = new Integer(scan.nextLine());
+        opt = new Long(scan.nextLine());
         try {
-            return titulos.get(opt - 1);
+            return dao.obtenerTitulo(opt);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static Titulo seleccionarTituloTema(Tema t) {
+        ArrayList<Titulo> titulos = dao.obtenerListaTitulosTema(t);
+        if (tema == null) {
+            seleccionarTema();
+        }
+        System.out.println("0 Sin titulo");
+        for (int i = 0; i < titulos.size(); i++) {
+            Titulo titulo = titulos.get(i);
+            System.out.println(titulo.toString());
+        }
+        long opt;
+        System.out.println("Seleccione Titulo:");
+        opt = new Long(scan.nextLine());
+        try {
+            return dao.obtenerTitulo(opt);
         } catch (Exception e) {
             return null;
         }
@@ -133,12 +159,40 @@ public class Asterisk {
         }
     }
 
+    public static Termino seleccionarTermino() {
+        System.out.println("Ingrese termino buscado: ");
+        String term = scan.nextLine().toLowerCase();
+        ArrayList<Termino> terminos = dao.obtenerListaTerminos(term, tema);
+        for (int i = 0; i < terminos.size(); i++) {
+            Termino t = terminos.get(i);
+            System.out.println((i + 1) + " " + t.toString());
+        }
+        System.out.println("Seleccione termino: ");
+        int opt = new Integer(scan.nextLine());
+        return terminos.get(opt);
+    }
+
+    public static void crearRelacion() {
+        Termino origen, destino;
+        String conexion;
+
+        Relacion relacion = new Relacion();
+        origen = seleccionarTermino();
+        destino = seleccionarTermino();
+        System.out.println("Ingrese descripcion conexion:");
+        conexion = scan.nextLine();
+        relacion.setTermino1(origen);
+        relacion.setTermino1(destino);
+        relacion.setConexion(conexion);
+        dao.create(relacion);
+    }
+
     public static void crearTermino() {
         if (tema == null) {
             tema = seleccionarTema();
         }
         if (titulo == null) {
-            titulo = seleccionarTituloTema(tema);
+            titulo = seleccionarTituloTema();
         }
         String term, def;
         System.out.println("Ingrese Termino:");
@@ -167,7 +221,47 @@ public class Asterisk {
             case 3:
                 crearTermino();
                 break;
+            case 4:
+                crearRelacion();
+                break;
+            case 5:
+                verTemas();
+                break;
+            case 6:
+
+                break;
+            case 11:
+                seleccionarTema();
+                break;
+            case 12:
+                seleccionarTituloTema();
+                break;
+            case 13:
+                System.exit(0);
+                break;
+
         }
+    }
+
+    public static void verTemas() {
+        ArrayList<Tema> temas = new ArrayList<Tema>();
+        for (int i = 0; i < temas.size(); i++) {
+            Tema t = temas.get(i);
+            System.out.println(t.toString());
+        }
+    }
+
+    public static void verTemaTitulos() {
+        if (tema == null) {
+            tema = seleccionarTema();
+        }
+        ArrayList<Titulo> titulos = dao.obtenerListaTitulosTema(tema);
+        
+        for (int i = 0; i < titulos.size(); i++) {
+            Titulo tit = titulos.get(i);
+            tit.imprime();
+        }
+
     }
 
     public static void mostrarMenu() {
@@ -178,13 +272,16 @@ public class Asterisk {
         System.out.println("3.Crear Termino");
         System.out.println("4.Crear Relacion");
         System.out.println("5.Ver Temas");
-        System.out.println("6.Ver Tema Titulo Termino");
-        System.out.println("7.Ver Titulos");
-        System.out.println("8.Ver Titulos Tema");
-        System.out.println("9.Ver Titulo Termino");
-        System.out.println("10.Ver Terminos Tema");
-        System.out.println("11.Seleccionar Titulo");
-        System.out.println("12.Seleccionar Tema");
+        System.out.println("6.Ver Tema Titulos ");
+        System.out.println("7.Ver Tema Terminos");
+        System.out.println("8.Ver Tema Titulos Termino");
+        System.out.println("9.Ver Titulos");
+        System.out.println("10.Ver Titulos Tema");
+        System.out.println("11.Ver Titulo Termino");
+        System.out.println("12.Ver Terminos Tema");
+        System.out.println("13.Seleccionar Tema");
+        System.out.println("14.Seleccionar Titulo");
+        System.out.println("15.Salir");
 
     }
 
