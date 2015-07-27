@@ -137,7 +137,7 @@ public class Titulo implements Serializable {
         for (int i = 0; i < nivel; i++) {
             s += "   ";
         }
-        return s + id + " " + titulo + " ";
+        return s +"["+ id + "] " + titulo + " ";
     }
 
     public void imprimeTerminos() {

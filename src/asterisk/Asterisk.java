@@ -36,7 +36,7 @@ public class Asterisk {
     private static Titulo titulo;
 
     public static void imprimirSeparador() {
-        System.out.println("*---*---*---*---*---*---*---*---*---*---*---*---*---*");
+        System.out.println("*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---*---");
     }
 
     public final static void clearConsole() {
@@ -156,8 +156,8 @@ public class Asterisk {
         ArrayList<Tema> temas = dao.obtenerListaTemas();
         System.out.println("0 Sin Tema");
         for (int i = 0; i < temas.size(); i++) {
-            Tema tema = temas.get(i);
-            System.out.println((i + 1) + " " + tema.toString());
+            Tema tt = temas.get(i);
+            System.out.println((i + 1) + " " + tt.toString());
         }
         System.out.println("Seleccione el tema");
         int opt;

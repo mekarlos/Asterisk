@@ -47,8 +47,8 @@ public class Tema implements Serializable {
     private ArrayList<Termino> terminos;
 
     public Tema() {
-        titulos = new ArrayList<>();
-        terminos = new ArrayList<>();
+        titulos = new ArrayList<Titulo>();
+        terminos = new ArrayList<Termino>();
 
     }
 
