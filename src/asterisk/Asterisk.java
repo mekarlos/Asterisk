@@ -13,6 +13,7 @@ import Modelo.Titulo;
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 /**
  *
@@ -33,6 +34,10 @@ public class Asterisk {
     private static DAO dao = new DAO();
     private static Tema tema;
     private static Titulo titulo;
+
+    public static void imprimirSeparador() {
+        System.out.println("*---*---*---*---*---*---*---*---*---*---*---*---*---*");
+    }
 
     public final static void clearConsole() {
         try {
@@ -81,7 +86,11 @@ public class Asterisk {
         } else {
             titulo.setNivel(padre.getNivel() + 1);
         }
+        tema.getTitulos().add(titulo);
+
         dao.create(titulo);
+        dao.update(tema);
+        dao.update(titulo);
     }
 
     public static Titulo seleccionarTitulo() {
@@ -118,6 +127,7 @@ public class Asterisk {
         try {
             return dao.obtenerTitulo(opt);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -215,10 +225,18 @@ public class Asterisk {
             def = formatoCapital(def);
             termino = new Termino(term, def, titulo, tema);
             dao.create(termino);
+            tema.getTerminos().add(termino);
+            titulo.getTerminos().add(termino);
+            dao.update(tema);
+            dao.update(titulo);
         }
     }
 
     public static void verTemas() {
+        imprimirSeparador();
+        if (tema != null) {
+            System.out.println(tema.toString().toUpperCase());
+        }
         ArrayList<Tema> temas = dao.obtenerListaTemas();
         for (int i = 0; i < temas.size(); i++) {
             Tema t = temas.get(i);
@@ -227,6 +245,11 @@ public class Asterisk {
     }
 
     public static void verTemaTitulos() {
+        imprimirSeparador();
+        if (tema != null) {
+
+            System.out.println(tema.toString().toUpperCase());
+        }
         if (tema == null) {
             tema = seleccionarTema();
         }
@@ -240,6 +263,10 @@ public class Asterisk {
     }
 
     public static void verTemaTituloTerminos() {
+        imprimirSeparador();
+        if (tema != null) {
+            System.out.println(tema.toString().toUpperCase());
+        }
         if (tema == null) {
             tema = seleccionarTema();
         }
@@ -253,6 +280,11 @@ public class Asterisk {
     }
 
     public static void verTemaTerminos() {
+        imprimirSeparador();
+        if (tema != null) {
+
+            System.out.println(tema.toString().toUpperCase());
+        }
         if (tema == null) {
             tema = seleccionarTema();
         }
@@ -263,7 +295,8 @@ public class Asterisk {
     }
 
     public static void mostrarMenu() {
-
+        System.out.println("Tema: " + tema);
+        System.out.println("Titulo: " + titulo);
         System.out.println("\t\tMenu");
         System.out.println("1.Crear Tema");
         System.out.println("2.Crear Titulo");
@@ -311,10 +344,10 @@ public class Asterisk {
                 verTemaTituloTerminos();
                 break;
             case 9:
-                seleccionarTema();
+                tema = seleccionarTema();
                 break;
             case 10:
-                seleccionarTituloTema();
+                titulo = seleccionarTituloTema();
                 break;
             case 11:
                 seleccionarTermino();
@@ -327,6 +360,7 @@ public class Asterisk {
     }
 
     public static void main(String[] args) {
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         while (true) {
             mostrarMenu();
             ejecutar();
