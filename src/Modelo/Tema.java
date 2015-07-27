@@ -29,7 +29,7 @@ public class Tema implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "s1")
-    @SequenceGenerator(name = "s1", sequenceName = "s1",initialValue = 1,allocationSize = 1)
+    @SequenceGenerator(name = "s1", sequenceName = "s1", initialValue = 1, allocationSize = 1)
     private long id;
     private String tema;
 
@@ -92,7 +92,7 @@ public class Tema implements Serializable {
 
     @Override
     public String toString() {
-        return id + " " + tema + "";
+        return tema + "";
     }
 
 }

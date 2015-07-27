@@ -163,14 +163,14 @@ public class DAO {
         return obtenerListaTerminos().get(r.nextInt(terminos.size()));
     }
 
-    public static void main(String[] args) {
-
-        DAO dao = new DAO();
-
-        Relacion r = new Relacion();
-
-        r.setConexion("sa");
-
-        dao.create(r);
-    }
+//    public static void main(String[] args) {
+//
+//        DAO dao = new DAO();
+//
+//        Relacion r = new Relacion();
+//
+//        r.setConexion("sa");
+//
+//        dao.create(r);
+//    }
 }

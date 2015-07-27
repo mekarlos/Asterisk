@@ -22,7 +22,7 @@ public class Termino implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "s2")
-    @SequenceGenerator(name = "s2", sequenceName = "s2",initialValue = 1,allocationSize = 1)
+    @SequenceGenerator(name = "s2", sequenceName = "s2", initialValue = 1, allocationSize = 1)
     private long id;
     private String termino;
     private String definicion;
@@ -38,6 +38,17 @@ public class Termino implements Serializable {
     }
 
     public Termino(String termino, String definicion) {
+        temas = new ArrayList<>();
+        titulos = new ArrayList<>();
+        this.termino = termino;
+        this.definicion = definicion;
+    }
+
+    public Termino(String termino, String definicion, Titulo titulo, Tema tema) {
+        temas = new ArrayList<>();
+        titulos = new ArrayList<>();
+        temas.add(tema);
+        titulos.add(titulo);
         this.termino = termino;
         this.definicion = definicion;
     }
@@ -80,6 +91,14 @@ public class Termino implements Serializable {
 
     public void setTitulos(ArrayList<Titulo> titulos) {
         this.titulos = titulos;
+    }
+
+    public void addTema(Tema tema) {
+        temas.add(tema);
+    }
+
+    public void addTitulo(Titulo titulo) {
+        titulos.add(titulo);
     }
 
     @Override
