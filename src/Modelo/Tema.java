@@ -94,5 +94,8 @@ public class Tema implements Serializable {
     public String toString() {
         return tema + "";
     }
+    public String toText(){
+        return "["+id+"]"+""+tema+"\t";
+    }
 
 }
