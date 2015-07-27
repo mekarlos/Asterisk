@@ -31,7 +31,7 @@ public class Titulo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "s3")
     @SequenceGenerator(name = "s3", sequenceName = "s3", initialValue = 1, allocationSize = 1)
-    private int id;
+    private long id;
     private String titulo;
     private int nivel;
     private String descripcion;
@@ -74,11 +74,11 @@ public class Titulo implements Serializable {
         this.subtitulos = subtitulos;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -135,7 +135,7 @@ public class Titulo implements Serializable {
 
         String s = "";
         for (int i = 0; i < nivel; i++) {
-            s += "\t";
+            s += "   ";
         }
         return s + id + " " + titulo + " ";
     }
@@ -148,7 +148,7 @@ public class Titulo implements Serializable {
         s += "\t";
         for (int i = 0; i < terminos.size(); i++) {
             Termino tt = terminos.get(i);
-            System.out.println(tt.toString());
+            System.out.println(s+tt.toString());
         }
 
     }
@@ -160,6 +160,7 @@ public class Titulo implements Serializable {
             t.imprimeTitulos();
         }
     }
+
     public void imprimeTituloTerminos() {
         System.out.println(toString());
         imprimeTerminos();

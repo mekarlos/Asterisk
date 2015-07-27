@@ -101,8 +101,8 @@ public class DAO {
     public ArrayList<Termino> obtenerListaTerminos(String termino, Tema tema) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("select d from Termino d where d.temas.tema=:tema and lower(d.termino) like :t");
-        query.setParameter("t", "" + termino.toLowerCase() + "");
+        Query query = em.createQuery("select d from Termino d INNER JOIN d.temas t where t=:tema and lower(d.termino) like :w");
+        query.setParameter("w", "" + termino.toLowerCase() + "");
         query.setParameter("tema", tema);
         ArrayList<Termino> ts = new ArrayList<>(query.getResultList());
         return ts;

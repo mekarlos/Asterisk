@@ -173,6 +173,9 @@ public class Asterisk {
         System.out.println("Ingrese termino buscado: ");
         String term = scan.nextLine().toLowerCase();
         ArrayList<Termino> terminos = dao.obtenerListaTerminos(term, tema);
+        if (terminos.isEmpty()) {
+            return null;
+        }
         System.out.println("0 No existe");
         for (int i = 0; i < terminos.size(); i++) {
             Termino t = terminos.get(i);
@@ -242,6 +245,7 @@ public class Asterisk {
             Tema t = temas.get(i);
             System.out.println((i + 1) + " " + t.toString());
         }
+        imprimirSeparador();
     }
 
     public static void verTemaTitulos() {
@@ -259,7 +263,7 @@ public class Asterisk {
             Titulo tit = titulos.get(i);
             tit.imprimeTitulos();
         }
-
+        imprimirSeparador();
     }
 
     public static void verTemaTituloTerminos() {
@@ -276,7 +280,7 @@ public class Asterisk {
             Titulo tit = titulos.get(i);
             tit.imprimeTituloTerminos();
         }
-
+        imprimirSeparador();
     }
 
     public static void verTemaTerminos() {
@@ -292,6 +296,7 @@ public class Asterisk {
             Termino tt = tema.getTerminos().get(i);
             System.out.println(tt.toString());
         }
+        imprimirSeparador();
     }
 
     public static void mostrarMenu() {

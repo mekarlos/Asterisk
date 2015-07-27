@@ -18,6 +18,8 @@ public class QuickAsterisk {
     public static void interprete(){
         
     }
+    
+    
     public static void main(String[] args) {
         
     }
