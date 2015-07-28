@@ -33,6 +33,28 @@ public class QuickAsterisk {
     private static Relacion auxRelacion;
     private static long id;
 
+    public static void verTemaTituloTerminos(String line) {
+        line = line.replace("pp ", "");
+        line = line.replace("pp", "");
+        if (line.length() > 0) {
+            id = new Long(line);
+
+            tema = dao.obtenerTema(id);
+        }
+        imprimirSeparador();
+        if (tema != null) {
+            System.out.println(tema.toString().toUpperCase());
+        }
+
+        ArrayList<Titulo> titulos = dao.obtenerListaTitulosTema(tema);
+
+        for (int i = 0; i < titulos.size(); i++) {
+            Titulo tit = titulos.get(i);
+            tit.imprimeTituloTerminos();
+        }
+        imprimirSeparador();
+    }
+
     public static void verTemaTitulos(String line) {
         line = line.replace("pt ", "");
         line = line.replace("pt", "");
@@ -119,13 +141,11 @@ public class QuickAsterisk {
     public static void seleccionarTema(String line) {
         id = new Long(line.replace("sa ", ""));
         tema = dao.obtenerTema(id);
-        System.out.println("Tema:" + tema);
     }
 
     public static void seleccionarTitulo(String line) {
         id = new Long(line.replace("st ", ""));
         titulo = dao.obtenerTitulo(id);
-        System.out.println("Titulo:" + titulo);
 
     }
 
@@ -165,12 +185,21 @@ public class QuickAsterisk {
         if (line.indexOf("+") > 0) {
             tit = line.substring(line.indexOf("+") + 1);
             id = new Long(tit);
-            auxTermino.getTitulos().add(dao.obtenerTitulo(id));
+            auxTitulo = dao.obtenerTitulo(id);
+            auxTermino.getTitulos().add(auxTitulo);
         } else {
             auxTermino.getTitulos().add(titulo);
         }
 
-        dao.create(auxTitulo);
+        dao.create(auxTermino);
+        auxTema = auxTermino.getTemas().get(auxTermino.getTemas().size() - 1);
+        auxTema = dao.obtenerTema(auxTema.getId());
+        auxTitulo = auxTermino.getTitulos().get(auxTermino.getTitulos().size() - 1);
+        auxTitulo = dao.obtenerTitulo(auxTitulo.getId());
+        auxTema.getTerminos().add(auxTermino);
+        auxTitulo.getTerminos().add(auxTermino);
+        dao.update(auxTema);
+        dao.update(auxTitulo);
         System.out.println("Termino Creado.");
     }
 
@@ -203,6 +232,8 @@ public class QuickAsterisk {
             verTemas();
         } else if (line.indexOf("pt") == 0) {
             verTemaTitulos(line);
+        } else if (line.indexOf("pp") == 0) {
+            verTemaTituloTerminos(line);
         } else if (line.indexOf("cp ") == 0) {
             crearTermino(line);
         } else if (line.indexOf("cr ") == 0) {
@@ -217,13 +248,16 @@ public class QuickAsterisk {
         System.setErr(new PrintStream("out.txt"));
         while (true) {
             try {
-                System.out.println("Tema: [" + tema.getId() + "]" + tema);
+                System.out.println("Tema: [" + tema.getId() + "] " + tema);
                 System.out.println("Titulo: " + titulo);
+            } catch (Exception e) {
 
+            }
+            try {
                 s = scan.nextLine();
                 interprete(s);
             } catch (Exception e) {
-
+                System.out.println("Bad Command");
             }
         }
     }
