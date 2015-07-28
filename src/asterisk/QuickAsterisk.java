@@ -12,6 +12,8 @@ import Modelo.Termino;
 import Modelo.Titulo;
 import static asterisk.Asterisk.imprimirSeparador;
 import static asterisk.Asterisk.seleccionarTema;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -210,12 +212,19 @@ public class QuickAsterisk {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         String s;
-
+        System.setErr(new PrintStream("out.txt"));
         while (true) {
-            s = scan.nextLine();
-            interprete(s);
+            try {
+                System.out.println("Tema: [" + tema.getId() + "]" + tema);
+                System.out.println("Titulo: " + titulo);
+
+                s = scan.nextLine();
+                interprete(s);
+            } catch (Exception e) {
+
+            }
         }
     }
 }
