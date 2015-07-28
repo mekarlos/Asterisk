@@ -6,7 +6,9 @@
 package asterisk;
 
 import Datos.DAO;
+import Modelo.Relacion;
 import Modelo.Tema;
+import Modelo.Termino;
 import Modelo.Titulo;
 import static asterisk.Asterisk.imprimirSeparador;
 import static asterisk.Asterisk.seleccionarTema;
@@ -25,16 +27,20 @@ public class QuickAsterisk {
     private static Titulo titulo;
     private static Tema auxTema;
     private static Titulo auxTitulo;
+    private static Termino auxTermino;
+    private static Relacion auxRelacion;
     private static long id;
 
     public static void verTemaTitulos(String line) {
         line = line.replace("pt ", "");
+        line = line.replace("pt", "");
         if (line.length() > 0) {
             id = new Long(line);
-            imprimirSeparador();
+
             tema = dao.obtenerTema(id);
         }
         ArrayList<Titulo> titulos = dao.obtenerListaTitulosTema(tema);
+        imprimirSeparador();
         if (tema != null) {
 
             System.out.println(tema.toString().toUpperCase());
@@ -64,6 +70,7 @@ public class QuickAsterisk {
 
     public static void crearTema(String line) {
         line = line.substring(3);
+        line = formatoCapital(line);
         auxTema = new Tema();
         auxTema.setTema(line);
         dao.create(auxTema);
@@ -79,7 +86,10 @@ public class QuickAsterisk {
         auxTitulo = new Titulo();
         String tit, desc, tem, princ;
         tit = line.substring(0, line.indexOf(":"));
+        tit = formatoCapital(tit);
+        auxTitulo.setTitulo(tit);
         desc = line.substring(line.indexOf(":") + 1, line.indexOf("."));
+        auxTitulo.setDescripcion(desc);
         if (line.indexOf("*") > 0) {
             tem = line.substring(line.indexOf("*") + 1, line.indexOf(" ", line.indexOf("*") + 1));
             id = new Long(tem);
@@ -117,12 +127,64 @@ public class QuickAsterisk {
 
     }
 
+    public static String formatoCapital(String text) {
+        String s = text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();;
+        s = s.replace("  ", " ");
+        return s;
+    }
+
     public static void crearTermino(String line) {
 
+        String term, def, tem, tit;
+        auxTermino = new Termino();
+        line = line.substring(3);
+        if (line.indexOf(".") < 0) {
+            System.out.println("Bad Command");
+            return;
+        }
+        term = line.substring(0, line.indexOf(":"));
+        ArrayList<Termino> terminos = dao.obtenerListaTerminos(term);
+        if (terminos.size() > 0) {
+            auxTermino = terminos.get(0);
+        }
+        term = formatoCapital(term);
+
+        auxTermino.setTermino(term);
+        def = line.substring(line.indexOf(":") + 1, line.indexOf("."));
+        auxTermino.setDefinicion(def);
+        if (line.indexOf("*") > 0) {
+            tem = line.substring(line.indexOf("*") + 1, line.indexOf(" ", line.indexOf("*") + 1));
+            id = new Long(tem);
+            auxTema = dao.obtenerTema(id);
+            auxTermino.getTemas().add(auxTema);
+        } else {
+            auxTermino.getTemas().add(tema);
+        }
+        if (line.indexOf("+") > 0) {
+            tit = line.substring(line.indexOf("+") + 1);
+            id = new Long(tit);
+            auxTermino.getTitulos().add(dao.obtenerTitulo(id));
+        } else {
+            auxTermino.getTitulos().add(titulo);
+        }
+
+        dao.create(auxTitulo);
+        System.out.println("Termino Creado.");
     }
 
     public static void crearRelacion(String line) {
-
+        line = line.substring(3);
+        String origen = line.substring(0, line.indexOf(" "));
+        line = line.substring(line.indexOf(" ") + 1);
+        String destino = line.substring(0, line.indexOf(" "));
+        line = line.substring(line.indexOf(" ") + 1);
+        String def = line;
+        long idOrigen, idDestino;
+        idOrigen = new Long(origen);
+        idDestino = new Long(destino);
+        auxRelacion = new Relacion(origen, auxTermino, auxTermino);
+        dao.create(auxRelacion);
+        System.out.println("Relacion creada");
     }
 
     public static void interprete(String line) {
@@ -135,9 +197,9 @@ public class QuickAsterisk {
             seleccionarTema(line);
         } else if (line.indexOf("st") == 0) {
             seleccionarTitulo(line);
-        } else if (line.equals("pa ")) {
+        } else if (line.equals("pa")) {
             verTemas();
-        } else if (line.equals("pt ")) {
+        } else if (line.indexOf("pt") == 0) {
             verTemaTitulos(line);
         } else if (line.indexOf("cp ") == 0) {
             crearTermino(line);

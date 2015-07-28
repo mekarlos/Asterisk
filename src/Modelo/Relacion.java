@@ -33,8 +33,7 @@ public class Relacion {
     public Relacion() {
     }
 
-    public Relacion(long id, String conexion, Termino termino1, Termino termino2) {
-        this.id = id;
+    public Relacion(String conexion, Termino termino1, Termino termino2) {
         this.conexion = conexion;
         this.termino1 = termino1;
         this.termino2 = termino2;

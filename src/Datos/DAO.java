@@ -107,6 +107,14 @@ public class DAO {
         ArrayList<Termino> ts = new ArrayList<>(query.getResultList());
         return ts;
     }
+    public ArrayList<Termino> obtenerListaTerminos(String termino ) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("select d from Termino d where lower(d.termino) like :w");
+        query.setParameter("w", "" + termino.toLowerCase() + "");
+        ArrayList<Termino> ts = new ArrayList<>(query.getResultList());
+        return ts;
+    }
 
     public ArrayList<Termino> obtenerListaTerminos() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
