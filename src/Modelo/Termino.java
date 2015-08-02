@@ -104,7 +104,7 @@ public class Termino implements Serializable {
 
     @Override
     public String toString() {
-        return "["+id+"]"+ termino;
+        return "("+id+")"+ termino+":"+definicion;
     }
 
 }

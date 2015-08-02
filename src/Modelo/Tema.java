@@ -46,7 +46,7 @@ public class Tema implements Serializable {
                 @JoinColumn(name = "terminoid", referencedColumnName = "ID")})
     private ArrayList<Termino> terminos;
 
-    public Tema() {
+    public Tema() {        
         titulos = new ArrayList<Titulo>();
         terminos = new ArrayList<Termino>();
 

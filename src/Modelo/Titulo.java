@@ -135,20 +135,25 @@ public class Titulo implements Serializable {
 
         String s = "";
         for (int i = 0; i < nivel; i++) {
-            s += "   ";
+            s += "\t";
         }
-        return s +"["+ id + "] " + titulo + " ";
+        return s + "[" + id + "] " + titulo + ": " + descripcion;
+    }
+
+    public String totText() {
+        return "[" + id + "] " + titulo + ": " + descripcion;
+
     }
 
     public void imprimeTerminos() {
         String s = "";
-        for (int i = 0; i < nivel; i++) {
+        for (int i = 0; i <= nivel; i++) {
             s += "\t";
         }
-        s += "\t";
+
         for (int i = 0; i < terminos.size(); i++) {
             Termino tt = terminos.get(i);
-            System.out.println(s+tt.toString());
+            System.out.println(s + tt.toString());
         }
 
     }
@@ -162,11 +167,11 @@ public class Titulo implements Serializable {
     }
 
     public void imprimeTituloTerminos() {
-        System.out.println(toString());
+        System.out.println(toString().toUpperCase());
         imprimeTerminos();
         for (int i = 0; i < subtitulos.size(); i++) {
             Titulo t = subtitulos.get(i);
-            t.imprimeTitulos();
+            t.imprimeTituloTerminos();
         }
     }
 

@@ -165,10 +165,11 @@ public class QuickAsterisk {
             return;
         }
         term = line.substring(0, line.indexOf(":"));
-        ArrayList<Termino> terminos = dao.obtenerListaTerminos(term);
-        if (terminos.size() > 0) {
-            auxTermino = terminos.get(0);
-        }
+        /*    ArrayList<Termino> terminos = dao.obtenerListaTerminos(term);
+         if (terminos.size() > 0) {
+         auxTermino = terminos.get(0);
+         }
+         */
         term = formatoCapital(term);
 
         auxTermino.setTermino(term);
@@ -238,6 +239,11 @@ public class QuickAsterisk {
             crearTermino(line);
         } else if (line.indexOf("cr ") == 0) {
             crearRelacion(line);
+        } else if (line.indexOf("caa ") == 0) {
+            while (!line.equals("-")) {
+                line = scan.nextLine();
+                crearTermino(line);
+            }
         } else {
             System.out.println("Bad Input");
         }
@@ -249,7 +255,7 @@ public class QuickAsterisk {
         while (true) {
             try {
                 System.out.println("Tema: [" + tema.getId() + "] " + tema);
-                System.out.println("Titulo: " + titulo);
+                System.out.println("Titulo: " + titulo.totText());
             } catch (Exception e) {
 
             }
