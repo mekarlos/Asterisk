@@ -22,7 +22,7 @@ import java.util.Scanner;
  * @author Carlos
  */
 public class QuickAsterisk {
-
+    
     private static Scanner scan = new Scanner(System.in);
     private static DAO dao = new DAO();
     private static Tema tema;
@@ -32,41 +32,41 @@ public class QuickAsterisk {
     private static Termino auxTermino;
     private static Relacion auxRelacion;
     private static long id;
-
+    
     public static void verTemaTituloTerminos(String line) {
         line = line.replace("pp ", "");
         line = line.replace("pp", "");
         if (line.length() > 0) {
             id = new Long(line);
-
+            
             tema = dao.obtenerTema(id);
         }
         imprimirSeparador();
         if (tema != null) {
             System.out.println(tema.toString().toUpperCase());
         }
-
+        
         ArrayList<Titulo> titulos = dao.obtenerListaTitulosTema(tema);
-
+        
         for (int i = 0; i < titulos.size(); i++) {
             Titulo tit = titulos.get(i);
             tit.imprimeTituloTerminos();
         }
         imprimirSeparador();
     }
-
+    
     public static void verTemaTitulos(String line) {
         line = line.replace("pt ", "");
         line = line.replace("pt", "");
         if (line.length() > 0) {
             id = new Long(line);
-
+            
             tema = dao.obtenerTema(id);
         }
         ArrayList<Titulo> titulos = dao.obtenerListaTitulosTema(tema);
         imprimirSeparador();
         if (tema != null) {
-
+            
             System.out.println(tema.toString().toUpperCase());
         }
         for (int i = 0; i < titulos.size(); i++) {
@@ -75,9 +75,9 @@ public class QuickAsterisk {
         }
         imprimirSeparador();
     }
-
+    
     public static void verTemas() {
-
+        
         if (tema != null) {
             System.out.println(tema.toString().toUpperCase());
         }
@@ -91,7 +91,7 @@ public class QuickAsterisk {
         System.out.print("\n");
         imprimirSeparador();
     }
-
+    
     public static void crearTema(String line) {
         line = line.substring(3);
         line = formatoCapital(line);
@@ -100,7 +100,7 @@ public class QuickAsterisk {
         dao.create(auxTema);
         System.out.println("Tema Creado.");
     }
-
+    
     public static void crearTitulo(String line) {
         line = line.substring(3);
         if (line.indexOf(".") < 0) {
@@ -137,29 +137,32 @@ public class QuickAsterisk {
         dao.create(auxTitulo);
         System.out.println("Titulo Creado.");
     }
-
+    
     public static void seleccionarTema(String line) {
         id = new Long(line.replace("sa ", ""));
         tema = dao.obtenerTema(id);
     }
-
+    
     public static void seleccionarTitulo(String line) {
         id = new Long(line.replace("st ", ""));
         titulo = dao.obtenerTitulo(id);
-
+        
     }
-
+    
     public static String formatoCapital(String text) {
         String s = text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();;
         s = s.replace("  ", " ");
         return s;
     }
-
+    
     public static void crearTermino(String line) {
-
+        
         String term, def, tem, tit;
         auxTermino = new Termino();
-        line = line.substring(3);
+        if (line.indexOf("cp ") == 0) {
+            line = line.substring(3);
+        }
+        
         if (line.indexOf(".") < 0) {
             System.out.println("Bad Command");
             return;
@@ -171,7 +174,7 @@ public class QuickAsterisk {
          }
          */
         term = formatoCapital(term);
-
+        
         auxTermino.setTermino(term);
         def = line.substring(line.indexOf(":") + 1, line.indexOf("."));
         auxTermino.setDefinicion(def);
@@ -191,7 +194,7 @@ public class QuickAsterisk {
         } else {
             auxTermino.getTitulos().add(titulo);
         }
-
+        
         dao.create(auxTermino);
         auxTema = auxTermino.getTemas().get(auxTermino.getTemas().size() - 1);
         auxTema = dao.obtenerTema(auxTema.getId());
@@ -203,7 +206,7 @@ public class QuickAsterisk {
         dao.update(auxTitulo);
         System.out.println("Termino Creado.");
     }
-
+    
     public static void crearRelacion(String line) {
         line = line.substring(3);
         String origen = line.substring(0, line.indexOf(" "));
@@ -218,9 +221,9 @@ public class QuickAsterisk {
         dao.create(auxRelacion);
         System.out.println("Relacion creada");
     }
-
+    
     public static void interprete(String line) {
-
+        
         if (line.indexOf("ca ") == 0) {
             crearTema(line);
         } else if (line.indexOf("ct ") == 0) {
@@ -239,16 +242,18 @@ public class QuickAsterisk {
             crearTermino(line);
         } else if (line.indexOf("cr ") == 0) {
             crearRelacion(line);
-        } else if (line.indexOf("caa ") == 0) {
+        } else if (line.indexOf("caa") == 0) {
+            line = scan.nextLine();
             while (!line.equals("-")) {
-                line = scan.nextLine();
+                
                 crearTermino(line);
+                line = scan.nextLine();
             }
         } else {
             System.out.println("Bad Input");
         }
     }
-
+    
     public static void main(String[] args) throws FileNotFoundException {
         String s;
         System.setErr(new PrintStream("out.txt"));
@@ -257,7 +262,7 @@ public class QuickAsterisk {
                 System.out.println("Tema: [" + tema.getId() + "] " + tema);
                 System.out.println("Titulo: " + titulo.totText());
             } catch (Exception e) {
-
+                
             }
             try {
                 s = scan.nextLine();
