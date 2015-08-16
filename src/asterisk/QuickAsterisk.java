@@ -132,7 +132,7 @@ public class QuickAsterisk {
         if (auxTitulo.getPrincipal() == null) {
             auxTitulo.setNivel(0);
         } else {
-            auxTitulo.setNivel(auxTitulo.getNivel() + 1);
+            auxTitulo.setNivel(auxTitulo.getPrincipal().getNivel() + 1);
         }
         dao.create(auxTitulo);
         System.out.println("Titulo Creado.");
