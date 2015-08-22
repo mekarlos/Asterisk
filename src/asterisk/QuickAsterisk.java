@@ -54,6 +54,29 @@ public class QuickAsterisk {
         }
         imprimirSeparador();
     }
+    
+    
+    public static void verTerminosTitulo(String line) {
+        line = line.replace("pk ", "");
+        line = line.replace("pk", "");
+        if (line.length() > 0) {
+            id = new Long(line);
+
+            titulo = dao.obtenerTitulo(id);
+        }
+        imprimirSeparador();
+        if (titulo != null) {
+            System.out.println(titulo.toString().toUpperCase());
+        }
+
+        ArrayList<Titulo> titulos = dao.obtenerListaTitulosTitulo(titulo);
+
+        for (int i = 0; i < titulos.size(); i++) {
+            Titulo tit = titulos.get(i);
+            tit.imprimeTituloTerminos();
+        }
+        imprimirSeparador();
+    }
 
     public static void verTemaTitulos(String line) {
         line = line.replace("pt ", "");
@@ -135,6 +158,7 @@ public class QuickAsterisk {
             auxTitulo.setNivel(auxTitulo.getPrincipal().getNivel() + 1);
         }
         dao.create(auxTitulo);
+        titulo=auxTitulo;
         System.out.println("Titulo Creado.");
     }
 
@@ -163,10 +187,10 @@ public class QuickAsterisk {
             line = line.substring(3);
         }
 
-        if (line.indexOf(".") < 0) {
+       /* if (line.indexOf(".") < 0) {
             System.out.println("Bad Command");
             return;
-        }
+        }*/
         term = line.substring(0, line.indexOf(":"));
         /*    ArrayList<Termino> terminos = dao.obtenerListaTerminos(term);
          if (terminos.size() > 0) {
@@ -176,7 +200,7 @@ public class QuickAsterisk {
         term = formatoCapital(term);
 
         auxTermino.setTermino(term);
-        def = line.substring(line.indexOf(":") + 1, line.indexOf("."));
+        def = line.substring(line.indexOf(":") + 1, line.length());
         auxTermino.setDefinicion(def);
         if (line.indexOf("*") > 0) {
             tem = line.substring(line.indexOf("*") + 1, line.indexOf(" ", line.indexOf("*") + 1));
@@ -238,6 +262,8 @@ public class QuickAsterisk {
             verTemaTitulos(line);
         } else if (line.indexOf("pp") == 0) {
             verTemaTituloTerminos(line);
+        }else if (line.indexOf("pk") == 0) {
+            verTerminosTitulo(line);
         } else if (line.indexOf("cp ") == 0) {
             crearTermino(line);
         } else if (line.indexOf("cr ") == 0) {

@@ -156,6 +156,13 @@ public class DAO {
         return new ArrayList<>(query.getResultList());
     }
 
+     public ArrayList<Titulo> obtenerListaTitulosTitulo(Titulo titulo) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("select d from Titulo d where d.principal=:t ");
+        query.setParameter("t", titulo);
+        return new ArrayList<>(query.getResultList());
+    }
     public ArrayList<Termino> obtenerListaTerminosTema(long id) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
         EntityManager em = emf.createEntityManager();
