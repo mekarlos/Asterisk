@@ -1,0 +1,64 @@
+		[58] TIPOS DE MUESTRAS: 
+			(501)Biopsias incisionales:
+			(502)Biopsias endoscopicas:
+			(503)Biopsias por puncion:
+			(504)Curetages o legrados:
+			(505)Biopsias a cielo abierto:
+			(506)Especimenes quirurgicos:
+			(507)Especimenes de autopsia o de viscerotomia:
+			(508)Citologias exfoliativas: de superficies mucosas o de liquidos corporales
+			(509)Citologias por aspiracion con aguja fina:
+		[68] ESTUDIOS CITOPATOLOGICOS: 
+			[69] CITOLOGIAS EXFOLIATIVAS: 
+				(529)Laminas portaobjetos: con borde esmerillado
+				(530)Cepillos:usados en citologia cervico vaginal (material endocervical), pero puede usaldo bajalenguas
+				(531)Citologia exfoliativa: vaginal, cavidad oral,conjuntiva
+				(532)Bastidor o gradilla: sobre este debe ponerse las laminas y fijarse inmediatamente
+				(533)Tiempo de fijacion: 15 minutos, usar gotero para el citofijador o el etanol
+				(534)Rotulo adhesivo: debe ponerse en uno de los estremos con nombre del paciente y tipo de muestra (cervico vaginal o demas)
+			[75] FIJADORES PARA INMUNOHISTOQUIMICA DE CITOLOGIAS EXFOLIATIVAS Y ASPIRATIVAS: 
+			[70] LIQUIDOS: 
+				(535)Envio: inmediato a laboratorio, si requiere transporte centrifugar a 200rpm 5min, luego se descarta sobrenadante
+				(536)Extendidos finos: se haram con misma metodologia frotis sangre periferica, se fija la mitad de laminas y la otra mitad se deja secar al aire libre, si no es posible realizar procedimiento agregar etanol 50% para garantizar preservacion material celular, debe evitarse eter o acetona
+			[71] ASPIRACION CON AGUJA FINA: 
+				(537)Extendidos finos: con misma tecnica de liquidos, se deja secar al ambiente mitad y la otra con alcohol 95%
+				(538)Muestras fijadas con alcohol o cotofijador: ideal para m con tincion papanicolaou o variantes
+				(539)Muestras secadas al aire: se colorean con coloraciones hematologicas ej wright, giemsa, diff quick
+			[73] IMPRONTAS: 
+				(540)Lamina portaobgetos: sobre esta se hacen toques suaves, se debe limpiar superficie de material hemorragico, mitad de laminas al aire libre y demas con alcohol 95%, citofijador o mezcla alcohol formol
+				(541)Lamina portaobgetos: sobre esta se hacen toques suaves, se debe limpiar superficie de material hemorragico, mitad de laminas al aire libre y demas con alcohol 95%, citofijador o mezcla alcohol formol
+			[74] FIJADORES PARA CITOLOGIAS EXFOLIATIVAS Y ASPIRATIVAS CONVENCIONALES: 
+				(542)Etanol 95%: buena fijacion, pero existen equivalencias, etanol 95%, metanol 100%,propanol 80%, sopropanol 80%, alcoho denaturado 95%
+				(543)Citofijador: elaborados con etanol 95% eter etilico y polietilenglicol
+				(544)Mezcla alcohol formol para improntas: exlusivo para improntas, e suele colorear con H-E, NO indicado en citologia exfoliativa ni aspirados debido a interferencia conb papanicolau
+				(545)Generalidades: alcohol 95% como acetona o el codificador a base de polietilenglicol favorece preservacio antigenica, se pueden usar extendidos secados al aire con refrigeracion 4øC, evitar formol
+		[59] SOLICITUD DE ESTUDIOS DE ANATOMIA PATOLOGICA: 
+			(510)Solicitud de estudios: debe ir acompa¤ados de registros completos para permitir diagnosticos completos
+			(511)Datos del estudio: Nombre paciente fecha envio muestra, edad, sexo, tipo muestra,procedencia,medico, tipo fijador o medio transporte, tipo estudio solicitado
+		[60] BIOSEGURIDAD: 
+			(512)Riesgo biologico: en pacientes con vih o hepatitis o con procesos infecciosos, debe informarse en las observaciones dicho riesgo
+		[61] MANEJO INICIAL DE MUESTRAS PARA ESTUDIOS HISTOPATOLOGICOS: 
+			(513)Evitar pinzamiento: por posible aparicion de artificios
+			(514)Microscopia optica y electronica: estas muestras se deben poner de inmediato en fijador para evitar cambios por autilisis, 10 - 20 volumenes de fijador por volumen de tejido
+			(515)Inmunofluorescencia o biopsia intraoperatorias por congelacion, cultivos microbiologicos: cuando es a partir de una sola muestra y se requiere estudio histopatologia, se pone tegidos con gasas humedecidas mienstras se seleccionan fragmentos para cada estudio, esto para evitar desecacion tisular
+			[62] FIJADORES PARA ESTUDIOS HISTOPATOLOGICOPS DE RUTINA: 
+				(517)Generalidades: tienen como finalidad estabilidadr estructura, hay tecnicas inmunohistoquimicas, tecnicas de hibridizacion de acidos nucleicos
+				(518)Formol tamponado neutro 10% ph 7,2 - 7,4:fijador universal est histopatologicos, formalina (formol 37 - 40%) pero se toma como 100%, se requiere tamponar el formol para preservar morfologia y det antigenicas en estudios de inmunohistoquimica, esto evita aparicion de pigementos, por interaccion con hemoglobina, reactivos-> formalina 100ml, fosfato monobasico de sodio (4gr) o fosfato dibasico de sodio(anhidro) 6.5gr,agua destilada 900ml, la velocidad de penetracion es muy lenta 1mm/h
+				(519)Formol 10%:solucion de formalina 10% mas 900ml de agua destilada, es fijador rapido, desventaja es su acidez por producir acido formico, interaccion con hemoglobina y polimerizacion expontanea, se genera retraccion tisular y pigmento de formolhematina, se debe evitar uso, pero puede usarse tiza(carbonato de calcio) para neutralizar acidez, puede producirse anhidrido carbonico y explotar recipiente
+				(520)Fijador de bouin: acido picrico, formalina, acido acetico glacial, esto da buen detalle morfologico y preservacion antigenica, elimina eritrocitos, indicado en biopsias renales, cutaneas, m osea y tracto gastrointestinal
+				(521)Fijadores con sales de mercurio: accion rapida, preservacion determinantes antigenicos en estudios inmunohistoquimicos, son costosos y se deben transferir a alcohol despues de una hora de fijacion debido a aparicion de artificios, es importante describir en solicitud el uso de estas soluciones por aparicion de precipitados de sales de mercurio, dentro de estos fijador de zenker indicado en biopsias renales, fijador b-5 indicado en bipsias de ganglio linfatico, fijador fma indicado en biopsias de piel son sospecha de lepra
+		[63] MANEJO INICIAL DE MUESTRAS PARA ESTUDIOS DE MICROSCOPIA ELECTRONICA: 
+			(522)Generalidades: fragmentos no mayor a mm de espesor para garantizar adecuada fijacion debido a q fijadores de ME son lentos, en caso de tumores tomar muestra focal de lesion evitando z necrosis o hemorragia, fijacion debe ser inmediata, en caso de envio a lab refrigerar a -4øC
+			(526)Generalidades: se han creado para muestras de dimensiones mayores que req est histopatologicos y de ultraestructura, penetran rapidamente en el tejido, debido a formaldehido o paraformaldehido, espesor maximo 2mm almacenamiento 4øC, se encuentran en estos Fijador Mc Dowell y Trump, F Carson, F Kamovsky(GA-Paraformaldehido)
+			[64] FIJADORES PARA ESTUDIO DE MICROSCOPIA ELECTRONICA CONVENCIONAL: 
+				(524)Genralidades: permiten adecuada preservacion de determinantes antigenicos en est inmunoelectrocitoquimicos
+				(525)Glutaraldehido(ga) 3% en buffer fosfato 0,1m: fijador universal estudios ultraestructurales, se recomienda tener en cuenta q la vida util de la solucion es de un mes, despues de esto se producen polimeros de GA, debe mantenerse a 4øC para enlentecer proceso, permanencia por encima de 48h en GA interfiere en estudio ultr
+			[65] FIJADORES DE USO UNIVERSAL PARA ESTUDIOS HISTOPATOLOGICOS Y DE MICROSCOPIA ELECTRONICA: 
+		[66] MANEJO DE MUESTRAS EN ESTUDIOS DE INMUNOFLUORESCENCIA E INMUNOHISTOQUIMICA A PARTIR DE TEJIDO NO FIJADO: 
+			(527)Generalidades: se recomienda colocar la muestran en sol salina o en gasas empapadas de suero fisiologico si es en la misma institucion,  en medio de michel o nitrogeno liquido isopentano
+		[67] RECIPIENTES PARA ENVIO DE MUESTRAS: 
+			(528)Seleccion de recipiente en medio de muchell: debe cumplir con, recipiente transparente o de vidrio transparente, con boca ancha, tapa de caucho o de plastico, identificados con rotulos adhesivos con los siguientes datos, fecha, nombre del paciente, num H clinica, institucion remitente, poblacion, tipo especimen, tipo estudio, para transporte de muestras refrigeradas termo, vidrio plastico o icopor de la sig forma - si son peque¤as vidrio o plastico con sol salina, para mayor tama¤o gasas empapadas con solucion salida y en recipiente icopor esto a su vez dentro de termos con hileo seco o corriente, muestras con nitrogeno liquido llevan envases dise¤ados especificamente para ello
+		[76] ENVIO Y TRANSPORTE DE MUESTRAS: 
+			(546)Especimenes quirurgicos o biopsias: sellar tapa con parafina o cinta adhesiva
+			(547)Recipiente: debe ponerse muestra en caja de carton plastico resistente, abullonando la muestra con algodon icopor o papel para evitar feactura
+			(548)Laminas: poner entre dos tapas de carton resistente selladas con cinta adhesiva y poner en sobre

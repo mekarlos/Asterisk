@@ -12,7 +12,11 @@ import Modelo.Termino;
 import Modelo.Titulo;
 import static asterisk.Asterisk.imprimirSeparador;
 import static asterisk.Asterisk.seleccionarTema;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -54,9 +58,8 @@ public class QuickAsterisk {
         }
         imprimirSeparador();
     }
-    
-    
-    public static void verTerminosTitulo(String line) {
+
+    public static void verTerminosTitulo(String line) throws IOException {
         line = line.replace("pk ", "");
         line = line.replace("pk", "");
         if (line.length() > 0) {
@@ -65,16 +68,23 @@ public class QuickAsterisk {
             titulo = dao.obtenerTitulo(id);
         }
         imprimirSeparador();
+         String s = "";
         if (titulo != null) {
+            s=titulo.toString().toUpperCase()+"\n";
             System.out.println(titulo.toString().toUpperCase());
         }
 
         ArrayList<Titulo> titulos = dao.obtenerListaTitulosTitulo(titulo);
-
+       
         for (int i = 0; i < titulos.size(); i++) {
             Titulo tit = titulos.get(i);
-            tit.imprimeTituloTerminos();
+            s += tit.imprimeTituloTerminos();
         }
+        File file = new File("out.txt");
+        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(s);
+        bw.close();
         imprimirSeparador();
     }
 
@@ -158,7 +168,7 @@ public class QuickAsterisk {
             auxTitulo.setNivel(auxTitulo.getPrincipal().getNivel() + 1);
         }
         dao.create(auxTitulo);
-        titulo=auxTitulo;
+        titulo = auxTitulo;
         System.out.println("Titulo Creado.");
     }
 
@@ -187,10 +197,10 @@ public class QuickAsterisk {
             line = line.substring(3);
         }
 
-       /* if (line.indexOf(".") < 0) {
-            System.out.println("Bad Command");
-            return;
-        }*/
+        /* if (line.indexOf(".") < 0) {
+         System.out.println("Bad Command");
+         return;
+         }*/
         term = line.substring(0, line.indexOf(":"));
         /*    ArrayList<Termino> terminos = dao.obtenerListaTerminos(term);
          if (terminos.size() > 0) {
@@ -246,7 +256,7 @@ public class QuickAsterisk {
         System.out.println("Relacion creada");
     }
 
-    public static void interprete(String line) {
+    public static void interprete(String line) throws IOException {
 
         if (line.indexOf("ca ") == 0) {
             crearTema(line);
@@ -262,7 +272,7 @@ public class QuickAsterisk {
             verTemaTitulos(line);
         } else if (line.indexOf("pp") == 0) {
             verTemaTituloTerminos(line);
-        }else if (line.indexOf("pk") == 0) {
+        } else if (line.indexOf("pk") == 0) {
             verTerminosTitulo(line);
         } else if (line.indexOf("cp ") == 0) {
             crearTermino(line);

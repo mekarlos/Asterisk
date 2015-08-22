@@ -145,17 +145,20 @@ public class Titulo implements Serializable {
 
     }
 
-    public void imprimeTerminos() {
+    public String imprimeTerminos() {
         String s = "";
+        String ss = "";
         for (int i = 0; i <= nivel; i++) {
             s += "\t";
+
         }
 
         for (int i = 0; i < terminos.size(); i++) {
             Termino tt = terminos.get(i);
+            ss += s + tt.toString() + "\n";
             System.out.println(s + tt.toString());
         }
-
+        return ss;
     }
 
     public void imprimeTitulos() {
@@ -166,13 +169,16 @@ public class Titulo implements Serializable {
         }
     }
 
-    public void imprimeTituloTerminos() {
+    public String imprimeTituloTerminos() {
+        String s = "";
+        s += toString().toUpperCase()+"\n";
         System.out.println(toString().toUpperCase());
-        imprimeTerminos();
+        s+=imprimeTerminos();
         for (int i = 0; i < subtitulos.size(); i++) {
             Titulo t = subtitulos.get(i);
-            t.imprimeTituloTerminos();
+            s += t.imprimeTituloTerminos();
         }
+        return s;
     }
 
 }
