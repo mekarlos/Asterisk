@@ -8,6 +8,7 @@ package Modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -173,6 +174,13 @@ public class Titulo implements Serializable {
         String s = "";
         s += toString().toUpperCase()+"\n";
         System.out.println(toString().toUpperCase());
+        subtitulos.sort(new Comparator<Titulo>() {
+
+            @Override
+            public int compare(Titulo o1, Titulo o2) {
+               return o1.getId()>o2.getId()?1:-1;
+            }
+        });
         s+=imprimeTerminos();
         for (int i = 0; i < subtitulos.size(); i++) {
             Titulo t = subtitulos.get(i);
@@ -180,5 +188,29 @@ public class Titulo implements Serializable {
         }
         return s;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 47 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Titulo other = (Titulo) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
 }

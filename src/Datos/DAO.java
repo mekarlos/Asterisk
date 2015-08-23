@@ -151,7 +151,7 @@ public class DAO {
     public ArrayList<Titulo> obtenerListaTitulosTema(Tema tema) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("select d from Titulo d where d.tema=:t and d.principal is null");
+        Query query = em.createQuery("select d from Titulo d where d.tema=:t and d.principal is null  order by d.id asc");
         query.setParameter("t", tema);
         return new ArrayList<>(query.getResultList());
     }
@@ -159,7 +159,7 @@ public class DAO {
      public ArrayList<Titulo> obtenerListaTitulosTitulo(Titulo titulo) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("select d from Titulo d where d.principal=:t ");
+        Query query = em.createQuery("select d from Titulo d where d.principal=:t order by d.id asc");
         query.setParameter("t", titulo);
         return new ArrayList<>(query.getResultList());
     }
@@ -167,7 +167,7 @@ public class DAO {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AsteriskPU");
         EntityManager em = emf.createEntityManager();
 
-        Query query = em.createQuery("select d from Termino d where d.tema.id=:id");
+        Query query = em.createQuery("select d from Termino d where d.tema.id=:id  order by d.id asc");
         query.setParameter("id", id);
         return new ArrayList<>(query.getResultList());
     }
